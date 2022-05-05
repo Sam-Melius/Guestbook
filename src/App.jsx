@@ -5,5 +5,17 @@ import Dashboard from './views/Users/Dashboard';
 
 
 export default function App() {
-  return <h1>Hello World</h1>;
+  return (
+    <Switch>
+      <Route path='/login'>
+        <Auth />
+      </Route>
+      <Route path='/dashboard'>
+        <Dashboard />
+      </Route>
+      <Route path='/'>
+        <Home />
+      </Route>
+    </Switch>
+  );
 }
