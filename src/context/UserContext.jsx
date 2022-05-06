@@ -8,7 +8,7 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(currentUser || { email: null });
 
   const login = async (email, password) => {
-      const authenticated = await signInUser({ eamil, password });
+      const authenticated = await signInUser({ email, password });
 
       if (authenticated) {
           setUser(authenticated);
@@ -16,7 +16,7 @@ export const UserProvider = ({ children }) => {
   };
 
   const logout = () => {
-      setUser({ eamil: null });
+      setUser({ email: null });
   };
 
 
