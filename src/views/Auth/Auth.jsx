@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useHistory, useLocation, Link } from 'react-router-dom';
-import { useUser } from '../../context/UserContext';
+import { useUser } from '../../hooks/useAuth';
 
 export default function Auth() {
   const { login, signUp } = useUser();
