@@ -1,4 +1,4 @@
-import { client, parseData } from './.client';
+import { client, parseData } from './client';
 
 export async function getEntries() {
     const request = await client
