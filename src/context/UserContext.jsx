@@ -1,11 +1,15 @@
 import { createContext, useContext, useState } from 'react';
-import { getUser, signInUser } from '../services/user';
+import { getUser, signInUser, signUpUser } from '../services/user';
 
 export const UserContext = createContext();
 
 export const UserProvider = ({ children }) => {
   const currentUser = getUser();
   const [user, setUser] = useState(currentUser || { email: null });
+
+  const signUp = async (email, password) => {
+      await signUpUser({ email, password });
+  }
 
   const login = async (email, password) => {
       const authenticated = await signInUser({ email, password });
@@ -21,7 +25,7 @@ export const UserProvider = ({ children }) => {
 
 
   return (
-    <UserContext.Provider value={{ user, login, logout }}>
+    <UserContext.Provider value={{ user, signUp, login, logout }}>
         {children}
     </UserContext.Provider>
   );
@@ -31,7 +35,7 @@ export const useUser = () => {
     const context = useContext(UserContext);
 
     if (context === undefined) {
-        throw new Error('userUser must b used in a UserProvider');
+        throw new Error('useUser must be used in a UserProvider');
     }
     return context;
 };
