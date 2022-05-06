@@ -6,17 +6,20 @@ export default function PrivateRoute({ children, ...rest }) {
   const location = useLocation();
 
   return (
-    <Route {...rest}>
-        {user.email ? (
+    <Route 
+      {...rest}
+      render={({ location }) =>
+    
+        user.email ? (
             children
         ) : (
             <Redirect
             to={{
                 pathname: '/login',
-                state: { origin: location },
+                state: { from: location },
             }}
             />
         )}
-    </Route>
-  )
+    />
+  );
 }

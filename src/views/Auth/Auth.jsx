@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useHistory, useLocation, Link } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 
 export default function Auth() {
@@ -37,6 +37,7 @@ export default function Auth() {
   return (
     <>
     <div>Auth</div>
+    <Link to='/'>Home</Link>
     <form>
         <input
             type='email'
