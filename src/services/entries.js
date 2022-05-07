@@ -14,3 +14,16 @@ export async function createEntry({ userID, content }) {
         .insert({ guest_id: userID, content });
         return parseData(request);
 }
+
+export async function updateEntryById(id, content) {
+    const request = await client
+      .from('entries')
+      .update({ content })
+      .match({ id });
+    return parseData(request);
+  }
+  
+  export async function deleteEntryById(id) {
+    const request = await client.from('entries').delete().match({ id });
+    return parseData(request);
+  }
