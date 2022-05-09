@@ -1,14 +1,15 @@
 import { useState } from 'react';
-import { useUser } from '../hooks/useAuth';
-import { createEntry } from '../services/entries';
+import { useUser } from '../../hooks/useAuth';
+import { createEntry } from '../../services/entries';
 
-export default function EntryForm({ refresh }) {
+export default function EntryForm({ onAddEntry }) {
   const [content, setContent] = useState('');
   const { user } = useUser();
 
-  async function addEntry(e) {
+  const handleAddEntry = async (e) => {
       e.preventDefault();
-      await createEntry({ userId: user.id, content });
+      const entry = await createEntry({ userId: user.id, content });
+      onAddEntry(entry);
       setContent('');
       refresh();
   }
@@ -16,8 +17,9 @@ export default function EntryForm({ refresh }) {
   return (
     <>
     <div>Create Entry</div>
-    <form onSubmit={addEntry}>
+    <form onAddEntry={handleAddEntry}>
         <textarea
+            id='content'
             name='content'
             value={content}
             onChange={(e) => setContent(e.target.value)} />
