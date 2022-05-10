@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-import { UserProvider } from '../../context/UserContext';
 import { useUser } from '../../hooks/useAuth';
 import { getEntries } from '../../services/entries';
 import EntryForm from '../../components/Entry/EntryForm';
@@ -33,7 +32,7 @@ export default function Dashboard() {
 
   return (
     <>
-    <div>Dashboard</div>
+    <h1>Dashboard</h1>
     <p>Signed in as: {user.email}</p>
     <button onClick={handleLogout}>Logout</button>
     <EntryForm onSubmit={refresh} />
@@ -42,11 +41,11 @@ export default function Dashboard() {
     ) : (
       <>
       <h3>Entries</h3>
-      <ul className="flex flex-col items-center">
+      <ul>
             {entries.length ? (
               entries.map(({ id, content, created_at }) => {
                 return (
-                  <li key={id} className="w-96">
+                  <li key={id} >
                     <Entry
                       content={content}
                       author={user.email}
