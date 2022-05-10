@@ -36,7 +36,7 @@ export default function Dashboard() {
     <div>Dashboard</div>
     <p>Signed in as: {user.email}</p>
     <button onClick={handleLogout}>Logout</button>
-    <EntryForm onAddEntry={fetchEntries} />
+    <EntryForm onSubmit={refresh} />
     {loading ? (
       <p>Loading...</p>
     ) : (
