@@ -93,6 +93,16 @@ describe('<App />', () => {
 
         const signInButton = screen.getByRole('button', { name: /sign in/i });
         userEvent.click(signInButton);
+          
+        await screen.findByRole('link', { name: /dashboard/i });
+        userEvent.click(dashboardLink);
+
+        // await screen.findByRole('heading', {
+        //     name: /dashboard/i,
+        //   }); 
+
+        // const entry = await screen.getByText('Hello, World!');
+        // expect(entry).toBeInTheDocument();
 
         
     })
