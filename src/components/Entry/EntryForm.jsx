@@ -15,7 +15,7 @@ export default function EntryForm() {
       e.preventDefault();
       const entry = await createEntry({ userId: user.id, content });
       setContent('');
-      refresh()
+      //refresh();
       
   }
 

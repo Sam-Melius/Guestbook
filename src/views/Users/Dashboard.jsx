@@ -35,7 +35,7 @@ export default function Dashboard() {
     <h1>Dashboard</h1>
     <p>Signed in as: {user.email}</p>
     <button onClick={handleLogout}>Logout</button>
-    <EntryForm onSubmit={refresh} />
+    <EntryForm  />
     {loading ? (
       <p>Loading...</p>
     ) : (

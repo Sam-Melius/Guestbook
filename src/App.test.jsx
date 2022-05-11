@@ -97,9 +97,7 @@ describe('<App />', () => {
         await screen.findByRole('link', { name: /dashboard/i });
         userEvent.click(dashboardLink);
 
-        // await screen.findByRole('heading', {
-        //     name: /dashboard/i,
-        //   }); 
+        screen.findByRole('button', { name: /add entry/i }); 
 
         // const entry = await screen.getByText('Hello, World!');
         // expect(entry).toBeInTheDocument();

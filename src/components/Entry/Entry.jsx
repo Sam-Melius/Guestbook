@@ -1,9 +1,12 @@
 import React from 'react'
 
-export default function Entry({ author, content}) {
+export default function Entry({ author, content, refresh}) {
+  
+
   return (
     <>
-    <div>Entry</div>
+    
+    <div refresh={refresh}>Entry</div>
     <p>{content}</p>
     <p>{author}</p>
     </>
