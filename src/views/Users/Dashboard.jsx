@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-import { UserProvider } from '../../context/UserContext';
 import { useUser } from '../../hooks/useAuth';
 import { getEntries } from '../../services/entries';
-import EntryForm from '../../components/EntryForm';
+import EntryForm from '../../components/Entry/EntryForm';
+import Entry from '../../components/Entry/Entry';
 
 export default function Dashboard() {
   const { user, logout } = useUser();
@@ -13,13 +13,13 @@ export default function Dashboard() {
     logout(() => history.push('/'));
   };
 
-  useEffect(() => {
-      async function fetchEntries() {
-          const results = await getEntries();
-          setEntries(results);
+  const fetchEntries = () => {
+    getEntries()
+      .then(setEntries)
+      .finally(() => setLoading(false));
+  };
 
-      setLoading(false);
-      };
+  useEffect(() => {
       fetchEntries();
   }, []);
 
@@ -32,20 +32,34 @@ export default function Dashboard() {
 
   return (
     <>
-    <div>Dashboard</div>
+    <h1>Dashboard</h1>
     <p>Signed in as: {user.email}</p>
     <button onClick={handleLogout}>Logout</button>
-    <EntryForm refresh={refresh} />
+    <EntryForm  />
     {loading ? (
       <p>Loading...</p>
     ) : (
       <>
       <h3>Entries</h3>
-    <ul>
-        {entries.map((entry) => (
-            <li key={entry.id}>{entry.content}{user.email}</li>
-        ))}
-    </ul>
+      <ul>
+            {entries.length ? (
+              entries.map(({ id, content, created_at }) => {
+                return (
+                  <li key={id} >
+                    <Entry
+                      content={content}
+                      author={user.email}
+                      date={created_at}
+                    />
+                  </li>
+                );
+              })
+            ) : (
+              <li>
+                No entries yet.
+              </li>
+            )}
+          </ul>
       </>
     )}
     
